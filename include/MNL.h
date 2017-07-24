@@ -3,8 +3,6 @@
 
 #include "MNCore.h"
 #include "MNSprite.h"
-#include "MNStructure.h"
-#include "assetsID.h"
 
 using namespace MNL;
 

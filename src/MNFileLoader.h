@@ -9,8 +9,8 @@ namespace MNL {
 
 	/* helper functions here */
 
-	SDL_Surface* LoadSurface(std::string path);
-	SDL_Texture* LoadTexture(std::string path);
+	bool LoadSurface(std::string path, SDL_Surface* pSurface);
+	bool LoadTexture(std::string path, SDL_Texture* pTexture);
 }
 
 #endif

@@ -4,7 +4,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
-#include "MNStructure.h"
 
 namespace MNL {
 

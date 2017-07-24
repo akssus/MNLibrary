@@ -1,6 +1,6 @@
 #include "MNSprite.h"
 #include "MNFileLoader.h"
-#include "assetsID.h"
+#include "MNCore.h"
 #include <string>
 
 
@@ -10,7 +10,6 @@ namespace MNL {
 							x(0),y(0),w(0),h(0)
 	{
 		m_pRenderer = MNCore::GetRenderer();
-		LoadTextureFromFile(AID_DEFAULT_TEXTURE);
 	}
 
 
@@ -23,10 +22,8 @@ namespace MNL {
 	MNSprite::MNSprite(SDL_Texture* pTexture) : x(0), y(0), w(0), h(0)
 	{
 		m_pRenderer = MNCore::GetRenderer();
-		if (!SetTexture(pTexture))
-		{
-			LoadTextureFromFile(AID_DEFAULT_TEXTURE);
-		}
+		if( pTexture != nullptr )
+			SetTexture(pTexture);
 	}
 
 	MNSprite::~MNSprite()
@@ -37,25 +34,19 @@ namespace MNL {
 
 	bool MNSprite::LoadTextureFromFile(std::string imageFilePath)
 	{
-		m_pTexture = MNL::LoadTexture(imageFilePath);
-		if (nullptr == m_pTexture)
-		{
-			m_pTexture = LoadTexture(AID_DEFAULT_TEXTURE);
-			return false;
-		}
+		if ( MNL::LoadTexture(imageFilePath, m_pTexture) == false ) return false;
+		
 		int tw, th;
 		SDL_QueryTexture(m_pTexture, nullptr, nullptr, &tw, &th);
 		w = tw;
 		h = th;
+
 		return true;
 	}
 	bool MNSprite::SetTexture(SDL_Texture* pTexture)
 	{
 		if (nullptr == pTexture)
-		{
-			SDL_Log("%s : null texture has set\n", __FUNCDNAME__);
 			return false;
-		}
 		else
 			m_pTexture = pTexture;
 
